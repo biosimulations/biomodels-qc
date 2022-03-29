@@ -397,7 +397,7 @@ def validate_sedml_file(filename, dirname=None, max_number_of_time_course_steps=
         simulators (:obj:`list` of :obj:`dict`, optional): specifications of simulators to use to check that the SED-ML file can be executed.
             Each dictionary should have the schema ``https://api.biosimulators.org/openapi.json#/components/schemas/Simulator``,
             or two keys ``id`` and ``version``.
-        
+
     Returns:
         :obj:`tuple`:
 
