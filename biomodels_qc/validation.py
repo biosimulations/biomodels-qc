@@ -264,13 +264,26 @@ def validate_octave_file(filename):
     result = subprocess.run(['octave', '--no-gui', '--no-window-system', '--quiet', filename],
                             check=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if result.returncode == 0:
-        stderr = result.stderr.decode(errors="ignore")
+        stderr = result.stderr.decode(errors="ignore").strip()
         if stderr.startswith('parse error'):
             return [['`{}` is not valid.'.format(filename), [[stderr]]]], []
         else:
             return [], []
     else:
-        raise RuntimeError('Octave failed')
+        stdout = result.stdout.decode(errors="ignore").strip()
+        stderr = result.stderr.decode(errors="ignore").strip()
+
+        result = subprocess.run('octave --version --no-gui --no-window-system --quiet | head -n 1 | rev | cut -d " " -f 1 | rev',
+                                check=False, stdout=subprocess.PIPE, shell=True)
+        version = result.stdout.decode(errors="ignore").strip()
+
+        msg = 'Octave failed:\n\n  Version: {}\n\n  STDOUT:\n    {}\n\n  STDERR:\n    {}'.format(
+            version,
+            stdout.replace('\n', '\n    '),
+            stderr.replace('\n', '\n    '),
+        )
+
+        return [['`{}` is not valid.'.format(filename), [[msg]]]], []
 
 
 def validate_owl_ontology_file(filename):
