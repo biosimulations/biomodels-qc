@@ -13,10 +13,10 @@ This application is intended to be used in conjuction with the best practices re
 ## Local installation
 
 ### Requirements
-* Python 3.9.0+
-* pip >= 19.3
+* [Python](https://python.org) 3.9.0+
+* [pip](https://pip.pypa.io/) >= 19.3
 * [Systems Biology Format Converter](http://sbfc.sourceforge.net/mediawiki/index.php/Main_Page)
-    * Java
+    * [Java](https://www.java.com/)
 * [Octave](https://www.gnu.org/software/octave/)
     * [Mac OS installer](https://www.gnu.org/software/octave/download)
     * Ubuntu: `apt-get install octave`
