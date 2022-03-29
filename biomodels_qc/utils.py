@@ -59,6 +59,7 @@ EXTENSION_COMBINE_FORMAT_MAP = {
     '.png': CombineArchiveContentFormat.PNG.value,
     '.py': CombineArchiveContentFormat.Python.value,
     '.r': CombineArchiveContentFormat.R.value,
+    '.rdf': CombineArchiveContentFormat.RDF_XML.value,
     '.rproj': CombineArchiveContentFormat.R_Project.value,
     '.sbml': CombineArchiveContentFormat.SBML.value,
     '.sbproj': CombineArchiveContentFormat.SimBiology_Project.value,
@@ -68,6 +69,7 @@ EXTENSION_COMBINE_FORMAT_MAP = {
     '.txt': CombineArchiveContentFormat.TEXT.value,
     '.vcml': CombineArchiveContentFormat.VCML.value,
     '.xml': CombineArchiveContentFormat.SBML.value,
+    '.xpp': CombineArchiveContentFormat.XPP.value,
     '.zip': CombineArchiveContentFormat.ZIP.value,
 }
 # map from file extensions to COMBINE format specification URLs
