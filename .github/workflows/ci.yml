@@ -1,0 +1,289 @@
+name: Continuous integration and release
+
+on:
+  # push:
+  workflow_dispatch:
+
+jobs:
+  getVersionNumber:
+    name: Get version number
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-version-number.outputs.version }}
+    steps:
+      - id: get-version-number
+        name: Get version number
+        env:
+          TAG: ${{ github.ref }}
+        run: |
+          version="${TAG/refs\/tags\//}"
+          echo "::set-output name=version::$version"
+
+  build:
+    name: Lint, test, and compile documentation
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-metadata.outputs.version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Setup pip cache
+        uses: actions/cache@v2
+        with:
+          path: /opt/hostedtoolcache/Python
+          key: ${{ runner.os }}-pip-${{ hashFiles('biomodels_qc/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install pip and setuptools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --upgrade setuptools
+
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '15'
+
+      - name: Install Systems Biology Format Converter (SBFC)
+        run: |
+          cd /tmp
+          wget https://sourceforge.net/projects/sbfc/files/sbfc/sbfc-1.3.7.zip/download -O sbfc-1.3.7.zip
+          unzip sbfc-1.3.7.zip
+          mv sbfc-1.3.7 /opt/
+          rm sbfc-1.3.7.zip
+          echo "/opt/sbfc-1.3.7" >> $GITHUB_PATH
+
+      - name: Install Octave
+        run: sudo apt-get install -y --no-install-recommends octave
+
+      - name: Install Scilab
+        run: sudo apt-get install -y --no-install-recommends scilab
+
+      - name: Install XPP
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends wget make gcc libx11-dev libc6-dev
+
+          cd /tmp
+          wget http://www.math.pitt.edu/~bard/bardware/xppaut_latest.tar.gz
+          mkdir xpp
+          tar zxvf xppaut_latest.tar.gz --directory xpp
+          cd xpp
+          make
+          sudo make install
+
+          cd /tmp
+          rm xppaut_latest.tar.gz
+          rm -r xpp
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
+
+      - name: Install requirements
+        run: npm install -g svglint
+
+      # install the package, including all of the requirements for the tests
+      - name: Install the package
+        run: |
+          python -m pip install cython
+          python -m pip install .[all]
+
+      # lint
+      - name: Install flake8
+        run: python -m pip install flake8
+
+      - name: Lint the package
+        run: python -m flake8
+
+      # test and upload coverage report to Codecov
+      - name: Run the tests
+        run: python -m pytest tests/ --cov=./biomodels_qc --cov-report=xml
+
+      - name: Upload the coverage report to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          file: biomodels_qc/coverage.xml
+
+      # compile documentation
+      - name: Install the requirements for the documentation
+        run: python -m pip install -r docs-src/requirements.txt
+
+      - name: Compile the documentation
+        run: |
+          sphinx-apidoc . setup.py --output-dir docs-src/source --force --module-first --no-toc
+          mkdir -p docs-src/_static
+          sphinx-build docs-src docs
+
+      # Build Docker image
+      - name: Get metadata
+        id: get-metadata
+        run: |
+          VERSION=$(cat biomodels_qc/_version.py | cut -d "'" -f 2- | cut -d "'" -f 1)
+          REVISION=$(git rev-parse HEAD)
+          CREATED=$(date --rfc-3339=seconds | sed 's/ /T/')
+
+          echo "::set-output name=version::$VERSION"
+          echo "::set-output name=revision::$REVISION"
+          echo "::set-output name=created::$CREATED"
+
+      - name: Build Docker image
+        uses: whoan/docker-build-with-cache-action@v5
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          password: "${{ secrets.DOCKER_REGISTRY_TOKEN }}"
+          image_name: biosimulations/biomodels_qc
+          image_tag: ${{ github.sha }}
+          build_extra_args: "--build-arg VERSION=${{ steps.get-metadata.outputs.version }} --label org.opencontainers.image.source=https://github.com/${{ github.repository }} --label org.opencontainers.image.revision=${{ steps.get-metadata.outputs.revision }} --label org.opencontainers.image.created=${{ steps.get-metadata.outputs.created }}"
+          dockerfile: Dockerfile
+          context: ./
+
+  release:
+    name: Release a new version
+    needs: [getVersionNumber, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name:
+        if: needs.getVersionNumber.outputs.version != needs.build.outputs.version
+        run: |
+          >&2 echo "Git tag '${{ needs.getVersionNumber.outputs.version }}' does not match the version of the Python package, '${{ needs.build.outputs.version }}'."
+          exit 1
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          ref: dev
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Setup pip cache
+        uses: actions/cache@v2
+        with:
+          path: /opt/hostedtoolcache/Python
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install pip and setuptools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --upgrade setuptools
+
+      # install the package, including all of the requirements for the tests
+      - name: Install the package
+        run: |
+          python -m pip install cython
+          python -m pip install .[all]
+
+      # Configure Git
+      - name: Configure Git
+        run: |
+          git config --local user.email "biosimulations.daemon@gmail.com"
+          git config --local user.name "BioSimulations Daemon"
+          git config pull.rebase false
+
+      # compile and push documentation
+      - name: Install the requirements for the documentation
+        run: python -m pip install -r docs-src/requirements.txt
+
+      - name: Compile the documentation
+        run: |
+          sphinx-apidoc . setup.py --output-dir docs-src/source --force --module-first --no-toc
+          mkdir -p docs-src/_static
+          sphinx-build docs-src docs
+
+      - id: commit-docs
+        name: Commit the compiled documentation
+        run: |
+          git stash
+          git pull
+          set +e
+          git stash pop
+          git add docs
+          git commit -m "Updating compiled documentation"
+          if [[ $? = 0 ]]; then
+            docsChanged=1
+          else
+            docsChanged=0
+          fi
+          echo "::set-output name=docsChanged::$docsChanged"
+
+      - name: Push the compiled documentation
+        if: steps.commit-docs.outputs.docsChanged == '1'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: dev
+
+      # Push Docker image
+      - name: Tag Docker image
+        run: |
+          docker image tag ghcr.io/biosimulations/biomodels_qc:${{ github.sha }} ghcr.io/biosimulations/biomodels_qc:${{ needs.getVersionNumber.outputs.version }}
+          docker image tag ghcr.io/biosimulations/biomodels_qc:${{ github.sha }} ghcr.io/biosimulations/biomodels_qc:latest
+
+      - name: Push Docker image
+        run: |
+          docker login ghcr.io \
+            --username ${{ secrets.DOCKER_REGISTRY_USERNAME }} \
+            --password ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+          docker push ghcr.io/biosimulations/biomodels_qc:${{ needs.getVersionNumber.outputs.version }}
+          docker push ghcr.io/biosimulations/biomodels_qc:latest
+
+      # Create GitHub release
+      - name: Create GitHub release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ needs.getVersionNumber.outputs.version }}
+          release_name: Release ${{ needs.getVersionNumber.outputs.version }}
+
+      # Create PyPI release
+      - name: Install pandoc
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends wget
+
+          wget https://github.com/jgm/pandoc/releases -O /tmp/pandocVersions.html
+          urlPart=`grep "\.deb" /tmp/pandocVersions.html | head -n 1 | cut -d'/' -f2-7 | cut -d'"' -f1`
+          wget "https://github.com/$urlPart" -O /tmp/pandoc.deb
+          sudo dpkg -i /tmp/pandoc.deb
+          rm /tmp/pandocVersions.html
+          rm /tmp/pandoc.deb
+
+      - name: Convert README to .rst format
+        run: pandoc --from=gfm --output=README.rst --to=rst README.md
+
+      - name: Install twine
+        run: |
+          python -m pip install wheel twine
+
+      - name: Create packages to upload to PyPI
+        run: |
+          python setup.py sdist
+          python setup.py bdist_wheel
+
+      - name: Upload packages to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          twine upload dist/*

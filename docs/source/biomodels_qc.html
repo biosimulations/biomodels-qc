@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4. biomodels_qc package &#8212; BioModels-QC 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. About BioModels-QC" href="../about.html" />
+    <link rel="prev" title="3. Documentation" href="../documentation.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">BioModels-QC</a></h1>
+
+
+
+<p class="blurb">Utilities for quality controlling the BioModels database</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=biosimulations&repo=biomodels-qc&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">2. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">3. Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. API documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">4.1. Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biomodels_qc.convert">4.2. biomodels_qc.convert module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biomodels_qc.utils">4.3. biomodels_qc.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biomodels_qc.validation">4.4. biomodels_qc.validation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biomodels_qc.warnings">4.5. biomodels_qc.warnings module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">5. About BioModels-QC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">6. Index</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://www.ebi.ac.uk/biomodels/">BioModels</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../documentation.html" title="previous chapter"><span class="section-number">3. </span>Documentation</a></li>
+      <li>Next: <a href="../about.html" title="next chapter"><span class="section-number">5. </span>About BioModels-QC</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-biomodels_qc">
+<span id="biomodels-qc-package"></span><h1><span class="section-number">4. </span>biomodels_qc package<a class="headerlink" href="#module-biomodels_qc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2><span class="section-number">4.1. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-biomodels_qc.convert">
+<span id="biomodels-qc-convert-module"></span><h2><span class="section-number">4.2. </span>biomodels_qc.convert module<a class="headerlink" href="#module-biomodels_qc.convert" title="Permalink to this headline">¶</a></h2>
+<p>Methods for converting the primary files for an entry of the BioModels database to alternative formats
+such as BioPAX, MATLAB/Octave, and XPP.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jonathan Karr &lt;<a class="reference external" href="mailto:karr&#37;&#52;&#48;mssm&#46;edu">karr<span>&#64;</span>mssm<span>&#46;</span>edu</a>&gt;</p>
+</dd>
+<dt class="field-even">Date</dt>
+<dd class="field-even"><p>2021-04-24</p>
+</dd>
+<dt class="field-odd">Copyright</dt>
+<dd class="field-odd"><p>2021, BioSimulations Team</p>
+</dd>
+<dt class="field-even">License</dt>
+<dd class="field-even"><p>MIT</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="biomodels_qc.convert.AltSbmlFormat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biomodels_qc.convert.</span></span><span class="sig-name descname"><span class="pre">AltSbmlFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/convert.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.convert.AltSbmlFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>A format that an SBML file can be converted to</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biomodels_qc.convert.AltSbmlFormat.BioPAX_l2">
+<span class="sig-name descname"><span class="pre">BioPAX_l2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'BioPAX_l2'</span></em><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/convert.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.convert.AltSbmlFormat.BioPAX_l2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biomodels_qc.convert.AltSbmlFormat.BioPAX_l3">
+<span class="sig-name descname"><span class="pre">BioPAX_l3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'BioPAX_l3'</span></em><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/convert.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.convert.AltSbmlFormat.BioPAX_l3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biomodels_qc.convert.AltSbmlFormat.MATLAB">
+<span class="sig-name descname"><span class="pre">MATLAB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MATLAB'</span></em><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/convert.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.convert.AltSbmlFormat.MATLAB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biomodels_qc.convert.AltSbmlFormat.OMEX_Metadata">
+<span class="sig-name descname"><span class="pre">OMEX_Metadata</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'OMEX_Metadata'</span></em><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/convert.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.convert.AltSbmlFormat.OMEX_Metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biomodels_qc.convert.AltSbmlFormat.Octave">
+<span class="sig-name descname"><span class="pre">Octave</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Octave'</span></em><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/convert.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.convert.AltSbmlFormat.Octave" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biomodels_qc.convert.AltSbmlFormat.SBML_URN">
+<span class="sig-name descname"><span class="pre">SBML_URN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SBML_URN'</span></em><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/convert.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.convert.AltSbmlFormat.SBML_URN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biomodels_qc.convert.AltSbmlFormat.XPP">
+<span class="sig-name descname"><span class="pre">XPP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'XPP'</span></em><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/convert.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.convert.AltSbmlFormat.XPP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.convert.convert_entry">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.convert.</span></span><span class="sig-name descname"><span class="pre">convert_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alt_sbml_formats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/convert.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.convert.convert_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the primary files for an entry of the BioModels database to alternative formats
+such as BioPAX, MATLAB/Octave, and XPP.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to directory for a entry of the BioModels database</p></li>
+<li><p><strong>alt_sbml_formats</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#biomodels_qc.convert.AltSbmlFormat" title="biomodels_qc.convert.AltSbmlFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AltSbmlFormat</span></code></a>, optional) – list of formats to convert
+SBML files to</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.convert.convert_sbml">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.convert.</span></span><span class="sig-name descname"><span class="pre">convert_sbml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alt_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alt_filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/convert.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.convert.convert_sbml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a SBML file to another format</p>
+<ul class="simple">
+<li><p>SBML (with URNs)</p></li>
+<li><p>MATLAB</p></li>
+<li><p>Octave</p></li>
+<li><p>OMEX metadata</p></li>
+<li><p>XPP</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to SBML file</p></li>
+<li><p><strong>alt_format</strong> (<a class="reference internal" href="#biomodels_qc.convert.AltSbmlFormat" title="biomodels_qc.convert.AltSbmlFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AltSbmlFormat</span></code></a>) – another format</p></li>
+<li><p><strong>alt_filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to save converted file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.convert.run_sbf_converter">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.convert.</span></span><span class="sig-name descname"><span class="pre">run_sbf_converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/convert.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.convert.run_sbf_converter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the Systems Biology Format Converter (SBFC)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to file to convert</p></li>
+<li><p><strong>format</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – format to convert file to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if the conversion failed</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-biomodels_qc.utils">
+<span id="biomodels-qc-utils-module"></span><h2><span class="section-number">4.3. </span>biomodels_qc.utils module<a class="headerlink" href="#module-biomodels_qc.utils" title="Permalink to this headline">¶</a></h2>
+<p>Utilities for quality controlling BioModels</p>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jonathan Karr &lt;<a class="reference external" href="mailto:karr&#37;&#52;&#48;mssm&#46;edu">karr<span>&#64;</span>mssm<span>&#46;</span>edu</a>&gt;</p>
+</dd>
+<dt class="field-even">Date</dt>
+<dd class="field-even"><p>2021-04-24</p>
+</dd>
+<dt class="field-odd">Copyright</dt>
+<dd class="field-odd"><p>2021, BioSimulations Team</p>
+</dd>
+<dt class="field-even">License</dt>
+<dd class="field-even"><p>MIT</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.utils.are_biopax_files_the_same">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.utils.</span></span><span class="sig-name descname"><span class="pre">are_biopax_files_the_same</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_b</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/utils.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.utils.are_biopax_files_the_same" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if two BioPAX files are the same, ignoring the time stamps when they were generated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename_a</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to first BioPAX file</p></li>
+<li><p><strong>filename_b</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to second BioPAX file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether the files are the same, ignoring the time stamps when they were generated</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.utils.build_combine_archive">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.utils.</span></span><span class="sig-name descname"><span class="pre">build_combine_archive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">archive_dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master_rel_filenames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/utils.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.utils.build_combine_archive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a COMBINE/OMEX archive from a directory of files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>archive_dirname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to directory with the contents of the archive</p></li>
+<li><p><strong>master_rel_filenames</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – filename of master file, relative to
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">archive_dirname</span></code></p></li>
+<li><p><strong>description</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – description of the archive</p></li>
+<li><p><strong>authors</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Person</span></code>, optional) – authors of the archive</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>archive</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.utils.does_sbml_file_represent_core_kinetic_model">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.utils.</span></span><span class="sig-name descname"><span class="pre">does_sbml_file_represent_core_kinetic_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/utils.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.utils.does_sbml_file_represent_core_kinetic_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine whether an SBML file represents a core kinetic model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to SBML file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether the file represents a core kinetic model (i.e., doesn’t use other mathematical package)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.utils.get_smbl_files_for_entry">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.utils.</span></span><span class="sig-name descname"><span class="pre">get_smbl_files_for_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_urn_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/utils.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.utils.get_smbl_files_for_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the paths to the SBML files for an entry of the BioModels database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to directory for a entry of the BioModels database</p></li>
+<li><p><strong>include_urn_files</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – whether to include the autogenerated URN files</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>SBML files for an entry of the BioModels database</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.utils.is_sbml_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.utils.</span></span><span class="sig-name descname"><span class="pre">is_sbml_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/utils.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.utils.is_sbml_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine whether a file is an SBML file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether the file is an SBML file</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-biomodels_qc.validation">
+<span id="biomodels-qc-validation-module"></span><h2><span class="section-number">4.4. </span>biomodels_qc.validation module<a class="headerlink" href="#module-biomodels_qc.validation" title="Permalink to this headline">¶</a></h2>
+<p>Methods for validating entries of the BioModels database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jonathan Karr &lt;<a class="reference external" href="mailto:karr&#37;&#52;&#48;mssm&#46;edu">karr<span>&#64;</span>mssm<span>&#46;</span>edu</a>&gt;</p>
+</dd>
+<dt class="field-even">Date</dt>
+<dd class="field-even"><p>2021-04-24</p>
+</dd>
+<dt class="field-odd">Copyright</dt>
+<dd class="field-odd"><p>2021, BioSimulations Team</p>
+</dd>
+<dt class="field-even">License</dt>
+<dd class="field-even"><p>MIT</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_combine_archive">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_combine_archive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_combine_archive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a COMBINE/OMEX archive is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to COMBINE/OMEX archive</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_copasi_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_copasi_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_copasi_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a COPASI file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to COPASI file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_copasi_file_in_subprocess">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_copasi_file_in_subprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_copasi_file_in_subprocess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a COPASI file is valid, handling segmentation faults in COPASI</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to COPASI file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_entry">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_extensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filenames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate an entry of the BioModels databse</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dirname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to directory for a entry of the BioModels database</p></li>
+<li><p><strong>file_extensions</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – list of file extensions (e.g., <cite>.png</cite>) to validate. Default:
+validate all file extensions</p></li>
+<li><p><strong>filenames</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – list of specific files to validate.
+Overides the <code class="xref py py-obj docutils literal notranslate"><span class="pre">file_extensions</span></code> argument. Default: validate all files.</p></li>
+<li><p><strong>simulators</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>, optional) – specifications of simulators to use to check that SED-ML files can be executed.
+Each dictionary should have the schema <code class="docutils literal notranslate"><span class="pre">https://api.biosimulators.org/openapi.json#/components/schemas/Simulator</span></code>,
+or two keys <code class="docutils literal notranslate"><span class="pre">id</span></code> and <code class="docutils literal notranslate"><span class="pre">version</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_filename">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a filename is valid</p>
+<ul class="simple">
+<li><p>Check that name only involves alphanumeric characters, underscores and dashes</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_image_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_image_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_format</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_image_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if an image file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to image file</p></li>
+<li><p><strong>image_format</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageFormat</span></code>) – image format</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_ipynb_notebook_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_ipynb_notebook_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_ipynb_notebook_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if an IPython/Jupyter notebook file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to notebook file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_matlab_data_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_matlab_data_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_matlab_data_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a MATLAB data file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to data file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_octave_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_octave_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_octave_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if an Octave file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to Octave file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_owl_ontology_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_owl_ontology_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_owl_ontology_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if an OWL ontology file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to OWL file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_pdf_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_pdf_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_pdf_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a PDF file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to PDF file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_python_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_python_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_python_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a Python file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to Python file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_sbml_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_sbml_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_sbml_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a SBML file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to SBML file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_scilab_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_scilab_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_scilab_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if an Scilab file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to Scilab file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_sedml_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_sedml_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_number_of_time_course_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_sedml_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a SED-ML file is valid, optionally including checking whether it can be executed by 1 or more simulation tools</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to SED-ML file</p></li>
+<li><p><strong>dirname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – directory for the BioModels entry which includes this SED-ML file</p></li>
+<li><p><strong>max_number_of_time_course_steps</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – maximum number of steps of a uniform time course
+before a warning for potentially excessive steps is raised</p></li>
+<li><p><strong>simulators</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>, optional) – specifications of simulators to use to check that the SED-ML file can be executed.
+Each dictionary should have the schema <code class="docutils literal notranslate"><span class="pre">https://api.biosimulators.org/openapi.json#/components/schemas/Simulator</span></code>,
+or two keys <code class="docutils literal notranslate"><span class="pre">id</span></code> and <code class="docutils literal notranslate"><span class="pre">version</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_vcml_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_vcml_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_vcml_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if an VCML file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to VCML file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_xml_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_xml_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_xml_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if an XML file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to XML file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_xpp_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_xpp_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_xpp_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if an XPP file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to XPP file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biomodels_qc.validation.validate_zip_file">
+<span class="sig-prename descclassname"><span class="pre">biomodels_qc.validation.</span></span><span class="sig-name descname"><span class="pre">validate_zip_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/validation.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.validation.validate_zip_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if an zip archive file is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to zip archive file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of errors</p></li>
+<li><p>nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>: nested list of warnings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-biomodels_qc.warnings">
+<span id="biomodels-qc-warnings-module"></span><h2><span class="section-number">4.5. </span>biomodels_qc.warnings module<a class="headerlink" href="#module-biomodels_qc.warnings" title="Permalink to this headline">¶</a></h2>
+<p>Warnings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jonathan Karr &lt;<a class="reference external" href="mailto:karr&#37;&#52;&#48;mssm&#46;edu">karr<span>&#64;</span>mssm<span>&#46;</span>edu</a>&gt;</p>
+</dd>
+<dt class="field-even">Date</dt>
+<dd class="field-even"><p>2021-06-06</p>
+</dd>
+<dt class="field-odd">Copyright</dt>
+<dd class="field-odd"><p>2021, BioSimulations Team</p>
+</dd>
+<dt class="field-even">License</dt>
+<dd class="field-even"><p>MIT</p>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="biomodels_qc.warnings.BiomodelsQcWarning">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biomodels_qc.warnings.</span></span><span class="sig-name descname"><span class="pre">BiomodelsQcWarning</span></span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/warnings.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.warnings.BiomodelsQcWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserWarning</span></code></p>
+<p>BioModels-QC warning</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="biomodels_qc.warnings.FileCouldNotBeConvertedWarning">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biomodels_qc.warnings.</span></span><span class="sig-name descname"><span class="pre">FileCouldNotBeConvertedWarning</span></span><a class="reference external" href="https://github.com/biosimulations/biomodels-qc/blob/dev/biomodels_qc/warnings.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biomodels_qc.warnings.FileCouldNotBeConvertedWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biomodels_qc.warnings.BiomodelsQcWarning" title="biomodels_qc.warnings.BiomodelsQcWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">biomodels_qc.warnings.BiomodelsQcWarning</span></code></a></p>
+<p>Warning for a problem converting a file to another format</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, BioSimulations Team.
+      
+      |
+      <a href="../_sources/source/biomodels_qc.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/biosimulations/biomodels-qc" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
