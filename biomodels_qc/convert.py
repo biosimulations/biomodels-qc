@@ -188,7 +188,7 @@ ALT_SBML_FORMAT_DATA = {
         'sbfc_id': 'SBML2XPP',
         'init_extension': '.xpp',
         'old_final_extension': '.xpp',
-        'final_extension': '.xpp',
+        'final_extension': '.ode',
     },
 }
 
