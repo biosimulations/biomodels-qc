@@ -671,6 +671,10 @@ EXTENSION_VALIDATOR_MAP = {
         'description': 'MATLAB data file',
         'validator': validate_matlab_data_file,
     },
+    '.ode': {
+        'description': 'XPP',
+        'validator': validate_xpp_file,
+    },
     '.omex': {
         'description': 'COMBINE/OMEX archive',
         'validator': validate_combine_archive,

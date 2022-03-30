@@ -361,12 +361,12 @@ class ValidationTestCase(unittest.TestCase):
         self.assertEqual(warnings, [])
 
     def test_validate_xpp_file(self):
-        filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000692', 'BIOMD0000000692.xpp')
+        filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000692', 'BIOMD0000000692.ode')
         errors, warnings = validation.validate_xpp_file(filename)
         self.assertEqual(errors, [])
         self.assertEqual(warnings, [])
 
-        bad_filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000693', 'BIOMD0000000693.xpp')
+        bad_filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000693', 'BIOMD0000000693.ode')
         errors, warnings = validation.validate_xpp_file(bad_filename)
         self.assertIn('Error allocating or compiling', flatten_nested_list_of_strings(errors))
         self.assertEqual(warnings, [])
