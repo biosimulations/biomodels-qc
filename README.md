@@ -1,6 +1,6 @@
 [![Latest release](https://img.shields.io/github/v/release/biosimulations/biomodels-qc)](https://github.com/biosimulations/biomodels-qc/releases)
 [![PyPI](https://img.shields.io/pypi/v/biomodels-qc)](https://pypi.org/project/biomodels-qc/)
-[![CI status](https://github.com/biosimulations/biomodels-qc/workflows/Continuous%20integration/badge.svg)](https://github.com/biosimulations/biomodels-qc/actions?query=workflow%3A%22Continuous+integration%22)
+[![CI status](https://github.com/biosimulations/biomodels-qc/actions/workflows/ci.yml/badge.svg)](https://github.com/biosimulations/biomodels-qc/actions/workflows/ci.yml)
 [![Test coverage](https://codecov.io/gh/biosimulations/biomodels-qc/branch/dev/graph/badge.svg)](https://codecov.io/gh/biosimulations/biomodels-qc)
 
 # BioModels-QC
