@@ -137,10 +137,16 @@ jobs:
           VERSION=$(cat biomodels_qc/_version.py | cut -d "'" -f 2- | cut -d "'" -f 1)
           REVISION=$(git rev-parse HEAD)
           CREATED=$(date --rfc-3339=seconds | sed 's/ /T/')
+          IMAGE_TAGS=${{ github.sha }}
+
+          if [[ "${{ github.ref }}" =~ ^refs/heads/ ]]; then
+            IMAGE_TAGS=${IMAGE_TAGS},${{ github.ref_name }}
+          fi
 
           echo "::set-output name=version::$VERSION"
           echo "::set-output name=revision::$REVISION"
           echo "::set-output name=created::$CREATED"
+          echo "::set-output name=imageTags::$IMAGE_TAGS"
 
       - name: Build Docker image
         uses: whoan/docker-build-with-cache-action@v5
@@ -149,7 +155,7 @@ jobs:
           username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
           password: "${{ secrets.DOCKER_REGISTRY_TOKEN }}"
           image_name: biosimulations/biomodels_qc
-          image_tag: ${{ github.sha }}
+          image_tag: ${{ steps.get-metadata.imageTags.version }}
           build_extra_args: "--build-arg VERSION=${{ steps.get-metadata.outputs.version }} --label org.opencontainers.image.source=https://github.com/${{ github.repository }} --label org.opencontainers.image.revision=${{ steps.get-metadata.outputs.revision }} --label org.opencontainers.image.created=${{ steps.get-metadata.outputs.created }}"
           dockerfile: Dockerfile
           context: ./
@@ -236,6 +242,10 @@ jobs:
           branch: dev
 
       # Push Docker image
+      - name: Pull Docker image
+        run: |
+          docker pull ghcr.io/biosimulations/biomodels_qc:${{ github.sha }}
+
       - name: Tag Docker image
         run: |
           docker image tag ghcr.io/biosimulations/biomodels_qc:${{ github.sha }} ghcr.io/biosimulations/biomodels_qc:${{ needs.getVersionNumber.outputs.version }}
