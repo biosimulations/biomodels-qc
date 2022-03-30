@@ -39,7 +39,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /opt/hostedtoolcache/Python
-          key: ${{ runner.os }}-pip-${{ hashFiles('biomodels_qc/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -118,7 +118,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: unittests
-          file: biomodels_qc/coverage.xml
+          file: coverage.xml
 
       # compile documentation
       - name: Install the requirements for the documentation
