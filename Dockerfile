@@ -117,6 +117,29 @@ RUN apt-get update -y \
     && apt-get install -y --no-install-recommends libfreetype6 \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Docker
+RUN apt-get update -y \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        gnupg \
+        lsb-release \
+    && $(curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg) \
+    && $(echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null) \
+    \
+    && apt-get update -y \
+    && apt-get install -y --no-install-recommends \
+        docker-ce \
+        docker-ce-cli \
+        containerd.io \
+    \
+    && apt-get remove -y \
+        curl \
+        gnupg \
+        lsb-release \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy code for package into image and install it
 COPY . /root/biomodels_qc
 RUN pip install /root/biomodels_qc \

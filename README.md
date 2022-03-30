@@ -76,6 +76,7 @@ Run the following commands to use the BioModels-QC Docker image to execute the s
 ENTRY_DIR=/path/to/directory-for-entry
 docker run \
     --mount type=bind,source="$ENTRY_DIR",target=/biomodels-entry \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
     --interactive \
     --tty \
     --rm \
@@ -89,6 +90,7 @@ docker run \
 ENTRY_DIR=/path/to/directory-for-entry
 docker run \
     --mount type=bind,source="$ENTRY_DIR",target=/biomodels-entry \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
     --interactive \
     --tty \
     --rm \

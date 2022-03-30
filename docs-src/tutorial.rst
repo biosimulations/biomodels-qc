@@ -26,6 +26,7 @@ Convert the files for an entry to additional formats::
     ENTRY_DIR=/path/to/directory-for-entry
     docker run \
         --mount type=bind,source="$ENTRY_DIR",target=/biomodels-entry \
+        --volume /var/run/docker.sock:/var/run/docker.sock \
         --interactive \
         --tty \
         --rm \
@@ -38,6 +39,7 @@ Validate an entry::
     ENTRY_DIR=/path/to/directory-for-entry
     docker run \
         --mount type=bind,source="$ENTRY_DIR",target=/biomodels-entry \
+        --volume /var/run/docker.sock:/var/run/docker.sock \
         --interactive \
         --tty \
         --rm \
