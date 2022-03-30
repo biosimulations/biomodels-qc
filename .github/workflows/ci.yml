@@ -22,8 +22,6 @@ jobs:
   build:
     name: Lint, test, and compile documentation
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.get-metadata.outputs.version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -130,6 +128,17 @@ jobs:
           mkdir -p docs-src/_static
           sphinx-build docs-src docs
 
+  buildDockerImage:
+    name: Build Docker image
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-metadata.outputs.version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
       # Build Docker image
       - name: Get metadata
         id: get-metadata
@@ -155,20 +164,20 @@ jobs:
           username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
           password: "${{ secrets.DOCKER_REGISTRY_TOKEN }}"
           image_name: biosimulations/biomodels_qc
-          image_tag: ${{ steps.get-metadata.imageTags.version }}
+          image_tag: ${{ steps.get-metadata.outputs.imageTags }}
           build_extra_args: "--build-arg VERSION=${{ steps.get-metadata.outputs.version }} --label org.opencontainers.image.source=https://github.com/${{ github.repository }} --label org.opencontainers.image.revision=${{ steps.get-metadata.outputs.revision }} --label org.opencontainers.image.created=${{ steps.get-metadata.outputs.created }}"
           dockerfile: Dockerfile
           context: ./
 
   release:
     name: Release a new version
-    needs: [getVersionNumber, build]
+    needs: [getVersionNumber, build, buildDockerImage]
     runs-on: ubuntu-latest
     steps:
       - name:
-        if: needs.getVersionNumber.outputs.version != needs.build.outputs.version
+        if: needs.getVersionNumber.outputs.version != needs.buildDockerImage.outputs.version
         run: |
-          >&2 echo "Git tag '${{ needs.getVersionNumber.outputs.version }}' does not match the version of the Python package, '${{ needs.build.outputs.version }}'."
+          >&2 echo "Git tag '${{ needs.getVersionNumber.outputs.version }}' does not match the version of the Python package, '${{ needs.buildDockerImage.outputs.version }}'."
           exit 1
 
       - name: Checkout code
