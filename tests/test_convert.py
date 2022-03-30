@@ -19,7 +19,7 @@ class ConvertTestCase(unittest.TestCase):
             glob.glob(os.path.join(self.temp_entry_dirname, '**', '*-biopax2.owl'), recursive=True),
             glob.glob(os.path.join(self.temp_entry_dirname, '**', '*-biopax3.owl'), recursive=True),
             glob.glob(os.path.join(self.temp_entry_dirname, '**', '*.m'), recursive=True),
-            glob.glob(os.path.join(self.temp_entry_dirname, '**', '*.xpp'), recursive=True),
+            glob.glob(os.path.join(self.temp_entry_dirname, '**', '*.ode'), recursive=True),
             glob.glob(os.path.join(self.temp_entry_dirname, '**', '*_urn.xml'), recursive=True),
         ):
             os.remove(filename)
@@ -40,7 +40,7 @@ class ConvertTestCase(unittest.TestCase):
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692-biopax3.owl'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692-matlab.m'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692-octave.m'),
-            os.path.join(self.temp_entry_dirname, 'BIOMD0000000692.xpp'),
+            os.path.join(self.temp_entry_dirname, 'BIOMD0000000692.ode'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692_urn.xml'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692.rdf'),
         ]))
@@ -60,7 +60,7 @@ class ConvertTestCase(unittest.TestCase):
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692-biopax3.owl'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692-matlab.m'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692-octave.m'),
-            os.path.join(self.temp_entry_dirname, 'BIOMD0000000692.xpp'),
+            os.path.join(self.temp_entry_dirname, 'BIOMD0000000692.ode'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692_urn.xml'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692.rdf'),
         ]))
@@ -74,7 +74,7 @@ class ConvertTestCase(unittest.TestCase):
 
         self.assertFalse(os.path.isfile(os.path.join(self.temp_entry_dirname, 'BIOMD0000000562-matlab.m')))
         self.assertFalse(os.path.isfile(os.path.join(self.temp_entry_dirname, 'BIOMD0000000562-octave.m')))
-        self.assertFalse(os.path.isfile(os.path.join(self.temp_entry_dirname, 'BIOMD0000000562.xpp')))
+        self.assertFalse(os.path.isfile(os.path.join(self.temp_entry_dirname, 'BIOMD0000000562.ode')))
 
         # stochastic simulation
         shutil.rmtree(self.temp_entry_dirname)
@@ -84,7 +84,7 @@ class ConvertTestCase(unittest.TestCase):
 
         self.assertFalse(os.path.isfile(os.path.join(self.temp_entry_dirname, 'model-matlab.m')))
         self.assertFalse(os.path.isfile(os.path.join(self.temp_entry_dirname, 'model-octave.m')))
-        self.assertFalse(os.path.isfile(os.path.join(self.temp_entry_dirname, 'model.xpp')))
+        self.assertFalse(os.path.isfile(os.path.join(self.temp_entry_dirname, 'model.ode')))
 
         # continuous kinetic simulation
         shutil.rmtree(self.temp_entry_dirname)
@@ -94,7 +94,7 @@ class ConvertTestCase(unittest.TestCase):
 
         self.assertTrue(os.path.isfile(os.path.join(self.temp_entry_dirname, 'model-matlab.m')))
         self.assertTrue(os.path.isfile(os.path.join(self.temp_entry_dirname, 'model-octave.m')))
-        self.assertTrue(os.path.isfile(os.path.join(self.temp_entry_dirname, 'model.xpp')))
+        self.assertTrue(os.path.isfile(os.path.join(self.temp_entry_dirname, 'model.ode')))
 
     def test_convert_delete_bad_urn_sbml(self):
         shutil.rmtree(self.temp_entry_dirname)
@@ -110,7 +110,7 @@ class ConvertTestCase(unittest.TestCase):
 
         convert.convert_entry(self.temp_entry_dirname)
 
-        self.assertFalse(os.path.isfile(os.path.join(self.temp_entry_dirname, 'BIOMD0000000693.xpp')))
+        self.assertFalse(os.path.isfile(os.path.join(self.temp_entry_dirname, 'BIOMD0000000693.ode')))
 
     def test_convert_entry_error_handling(self):
         os.rename(os.path.join(self.temp_entry_dirname, 'BIOMD0000000692.svg'),
