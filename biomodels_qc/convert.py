@@ -115,11 +115,6 @@ def convert_entry(dirname, alt_sbml_formats=None):
                                   FileCouldNotBeConvertedWarning)
                     os.remove(alt_filename)
 
-                elif alt_sbml_format == AltSbmlFormat.SBML_URN and validate_sbml_file(alt_filename)[0]:
-                    warnings.warn(termcolor.colored('`{}` could not be converted to valid SBML file.'.format(filename)),
-                                  FileCouldNotBeConvertedWarning)
-                    os.remove(alt_filename)
-
                 elif alt_sbml_format == AltSbmlFormat.XPP and validate_xpp_file(alt_filename)[0]:
                     warnings.warn(termcolor.colored('`{}` could not be converted to valid XPP file.'.format(filename)),
                                   FileCouldNotBeConvertedWarning)
@@ -131,7 +126,6 @@ def convert_entry(dirname, alt_sbml_formats=None):
 
 class AltSbmlFormat(str, enum.Enum):
     """ A format that an SBML file can be converted to """
-    SBML_URN = 'SBML_URN'
     BioPAX_l2 = 'BioPAX_l2'
     BioPAX_l3 = 'BioPAX_l3'
     MATLAB = 'MATLAB'
@@ -141,13 +135,6 @@ class AltSbmlFormat(str, enum.Enum):
 
 
 ALT_SBML_FORMAT_DATA = {
-    AltSbmlFormat.SBML_URN: {
-        'format': AltSbmlFormat.SBML_URN,
-        'sbfc_id': 'URL2URN',
-        'init_extension': '-url2urn.xml',
-        'old_final_extension': '_urn.xml',
-        'final_extension': '_urn.xml',
-    },
     AltSbmlFormat.BioPAX_l2: {
         'format': AltSbmlFormat.BioPAX_l2,
         'sbfc_id': 'SBML2BioPAX_l2',
