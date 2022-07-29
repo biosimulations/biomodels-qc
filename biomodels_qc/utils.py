@@ -167,7 +167,7 @@ def does_sbml_file_represent_core_kinetic_model(filename):
         plugin = doc.getPlugin(i_plugin)
         package_name = plugin.getPackageName()
         if (
-            package_name in ['arrays', 'comp', 'distrib', 'dyn', 'fbc', 'groups', 'math', 'multi', 'qual', 'spatial']
+            package_name in ['arrays', 'distrib', 'dyn', 'fbc', 'math', 'multi', 'qual', 'spatial']
         ):
             return False
     return True
