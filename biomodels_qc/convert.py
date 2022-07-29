@@ -8,7 +8,7 @@ such as BioPAX, MATLAB/Octave, and XPP.
 """
 
 from .utils import get_smbl_files_for_entry, are_biopax_files_the_same, does_sbml_file_represent_core_kinetic_model
-from .validation import validate_sbml_file, validate_xpp_file, validate_octave_file
+from .validation import validate_xpp_file, validate_octave_file
 from .warnings import FileCouldNotBeConvertedWarning
 from biosimulators_utils.omex_meta.data_model import OmexMetadataOutputFormat
 from biosimulators_utils.omex_meta.utils import build_omex_meta_file_for_model
