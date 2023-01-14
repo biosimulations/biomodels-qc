@@ -365,6 +365,9 @@ def validate_sbml_file(filename):
             * nested :obj:`list` of :obj:`str`: nested list of warnings
     """
     doc = libsbml.readSBMLFromFile(filename)
+    if doc.getModel().getNumReactions() > 1000:
+        #Don't do unit checking for huge models.
+        doc.setConsistencyChecks(libsbml.LIBSBML_CAT_UNITS_CONSISTENCY, False)
     doc.checkConsistency()
 
     errors = []
