@@ -71,7 +71,20 @@ jobs:
 
       - name: Install XPP
         run: |
-        run: sudo apt-get install -y --no-install-recommends xppaut
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends wget make gcc libx11-dev libc6-dev xppaut
+
+#          cd /tmp
+#          wget http://www.math.pitt.edu/~bard/bardware/xppaut_latest.tar.gz
+#          mkdir xpp
+#          tar zxvf xppaut_latest.tar.gz --directory xpp
+#          cd xpp
+#          make
+#          sudo make install
+#
+#          cd /tmp
+#          rm xppaut_latest.tar.gz
+#          rm -r xpp
 
       - name: Install Node.js
         uses: actions/setup-node@v2
