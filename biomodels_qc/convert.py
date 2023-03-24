@@ -216,7 +216,7 @@ def convert_sbml(filename, alt_format, alt_filename, omexname):
             shutil.rmtree(temp_dir)
 
     elif format_data.get('format', None) == AltSbmlFormat.OMEX_Metadata:
-        build_omex_meta_file_for_model(filename, alt_filename, metadata_format=OmexMetadataOutputFormat.rdfxml_abbrev, archive_uri = omexname)
+        build_omex_meta_file_for_model(filename, alt_filename, metadata_format=OmexMetadataOutputFormat.rdfxml_abbrev, archive_uri=omexname)
 
     else:
         raise NotImplementedError('Format `{}` is not supported.'.format(alt_format))
