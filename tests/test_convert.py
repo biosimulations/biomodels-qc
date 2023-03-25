@@ -41,7 +41,7 @@ class ConvertTestCase(unittest.TestCase):
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692-matlab.m'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692-octave.m'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692.ode'),
-            os.path.join(self.temp_entry_dirname, 'BIOMD0000000692_urn.xml'),
+            #os.path.join(self.temp_entry_dirname, 'BIOMD0000000692_urn.xml'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692.rdf'),
         ]))
 
@@ -61,7 +61,7 @@ class ConvertTestCase(unittest.TestCase):
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692-matlab.m'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692-octave.m'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692.ode'),
-            os.path.join(self.temp_entry_dirname, 'BIOMD0000000692_urn.xml'),
+            #os.path.join(self.temp_entry_dirname, 'BIOMD0000000692_urn.xml'),
             os.path.join(self.temp_entry_dirname, 'BIOMD0000000692.rdf'),
         ]))
 

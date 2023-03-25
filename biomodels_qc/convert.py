@@ -180,7 +180,7 @@ ALT_SBML_FORMAT_DATA = {
 }
 
 
-def convert_sbml(filename, alt_format, alt_filename, omexname):
+def convert_sbml(filename, alt_format, alt_filename, omexname=None):
     """ Convert a SBML file to another format
 
     * SBML (with URNs)
