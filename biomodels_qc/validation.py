@@ -320,8 +320,8 @@ def validate_pdf_file(filename):
     """
     try:
         with open(filename, 'rb') as file:
-            PyPDF2.PdfFileReader(file)
-    except PyPDF2.utils.PdfReadError as exception:
+            PyPDF2.PdfReader(file)
+    except PyPDF2.PdfReadError as exception:
         return [[str(exception)]], []
 
     with open(filename, 'rb') as file:
