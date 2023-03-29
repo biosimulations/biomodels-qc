@@ -320,8 +320,8 @@ def validate_pdf_file(filename):
     """
     try:
         with open(filename, 'rb') as file:
-            PyPDF2.PdfFileReader(file)
-    except PyPDF2.utils.PdfReadError as exception:
+            PyPDF2.PdfReader(file)
+    except PyPDF2.errors.PdfReadError as exception:
         return [[str(exception)]], []
 
     with open(filename, 'rb') as file:
@@ -366,7 +366,7 @@ def validate_sbml_file(filename):
     """
     doc = libsbml.readSBMLFromFile(filename)
     if doc.getModel().getNumReactions() > 1000:
-        #Don't do unit checking for huge models.
+        # Don't do unit checking for huge models.
         doc.setConsistencyChecks(libsbml.LIBSBML_CAT_UNITS_CONSISTENCY, False)
     doc.checkConsistency()
 

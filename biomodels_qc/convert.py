@@ -35,7 +35,7 @@ __all__ = [
 _ODE_INTEGRATION_KISAO_TERM_IDS = None
 
 
-def convert_entry(dirname, alt_sbml_formats=None):
+def convert_entry(dirname, alt_sbml_formats=None, omexname=None):
     """ Convert the primary files for an entry of the BioModels database to alternative formats
     such as BioPAX, MATLAB/Octave, and XPP.
 
@@ -101,7 +101,7 @@ def convert_entry(dirname, alt_sbml_formats=None):
 
                 fid, temp_filename = tempfile.mkstemp()
                 os.close(fid)
-                convert_sbml(filename, alt_sbml_format, temp_filename)
+                convert_sbml(filename, alt_sbml_format, temp_filename, omexname)
 
                 move_to_alt_filename = True
                 if alt_sbml_format in [AltSbmlFormat.BioPAX_l2, AltSbmlFormat.BioPAX_l3] and os.path.isfile(alt_filename):
@@ -180,7 +180,7 @@ ALT_SBML_FORMAT_DATA = {
 }
 
 
-def convert_sbml(filename, alt_format, alt_filename):
+def convert_sbml(filename, alt_format, alt_filename, omexname=None):
     """ Convert a SBML file to another format
 
     * SBML (with URNs)
@@ -216,7 +216,7 @@ def convert_sbml(filename, alt_format, alt_filename):
             shutil.rmtree(temp_dir)
 
     elif format_data.get('format', None) == AltSbmlFormat.OMEX_Metadata:
-        build_omex_meta_file_for_model(filename, alt_filename, metadata_format=OmexMetadataOutputFormat.rdfxml_abbrev)
+        build_omex_meta_file_for_model(filename, alt_filename, metadata_format=OmexMetadataOutputFormat.rdfxml_abbrev, archive_uri=omexname)
 
     else:
         raise NotImplementedError('Format `{}` is not supported.'.format(alt_format))
