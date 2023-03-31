@@ -243,13 +243,19 @@ def _handle_sbf_converter_errors(filename, temp_filename, alt_filename, alt_form
 
     if value_error is not None:
         os.remove(alt_filename)
+        altname = alt_format
+        if hasattr(alt_format, 'name'):
+            altname = alt_format.name
         raise ValueError('`{}` could not be converted to {}:\n\n  {}'.format(
-            filename, alt_format.name, value_error.replace('\n', '\n  ')))
+            filename, altname, value_error.replace('\n', '\n  ')))
 
     if runtime_error is not None:
         os.remove(alt_filename)
+        altname = alt_format
+        if hasattr(alt_format, 'name'):
+            altname = alt_format.name
         raise RuntimeError('`{}` could not be converted to {}:\n\n  {}'.format(
-            filename, alt_format.name, runtime_error.replace('\n', '\n  ')))
+            filename, altname, runtime_error.replace('\n', '\n  ')))
 
 
 def run_sbf_converter(filename, format):
