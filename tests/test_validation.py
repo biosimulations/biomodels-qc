@@ -272,16 +272,16 @@ class ValidationTestCase(unittest.TestCase):
             self.assertIn("could not execute the archive", flatten_nested_list_of_strings(errors))
             self.assertNotEqual(warnings, [])
 
-    # def test_validate_svg_file(self):
-    #     filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000692', 'BIOMD0000000692.svg')
-    #     errors, warnings = validation.validate_svg_file(filename)
-    #     self.assertEqual(errors, [])
-    #     self.assertEqual(warnings, [])
+    def test_validate_svg_file(self):
+        filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000692', 'BIOMD0000000692.svg')
+        errors, warnings = validation.validate_svg_file(filename)
+        self.assertEqual(errors, [])
+        self.assertEqual(warnings, [])
 
-    #     png_filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000692', 'BIOMD0000000692.png')
-    #     errors, warnings = validation.validate_svg_file(png_filename)
-    #     self.assertNotEqual(errors, [])
-    #     self.assertEqual(warnings, [])
+        png_filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000692', 'BIOMD0000000692.png')
+        errors, warnings = validation.validate_svg_file(png_filename)
+        self.assertNotEqual(errors, [])
+        self.assertEqual(warnings, [])
 
     def test_validate_vcml_file(self):
         filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000001', 'BIOMD0000000001.vcml')
