@@ -17,7 +17,7 @@ jobs:
           TAG: ${{ github.ref }}
         run: |
           version="${TAG/refs\/tags\//}"
-          echo "::set-output name=version::$version"
+          echo "version=$version" >> $GITHUB_OUTPUT
 
   build:
     name: Lint, test, and compile documentation
@@ -152,10 +152,10 @@ jobs:
             IMAGE_TAGS=${IMAGE_TAGS},${{ github.ref_name }}
           fi
 
-          echo "::set-output name=version::$VERSION"
-          echo "::set-output name=revision::$REVISION"
-          echo "::set-output name=created::$CREATED"
-          echo "::set-output name=imageTags::$IMAGE_TAGS"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "revision=$REVISION" >> $GITHUB_OUTPUT
+          echo "created=$CREATED" >> $GITHUB_OUTPUT
+          echo "imageTags=$IMAGE_TAGS" >> $GITHUB_OUTPUT
 
       - name: Build Docker image
         uses: whoan/docker-build-with-cache-action@v5
@@ -241,7 +241,7 @@ jobs:
           else
             docsChanged=0
           fi
-          echo "::set-output name=docsChanged::$docsChanged"
+          echo "docsChanged=$docsChanged" >> $GITHUB_OUTPUT
 
       - name: Push the compiled documentation
         if: steps.commit-docs.outputs.docsChanged == '1'
