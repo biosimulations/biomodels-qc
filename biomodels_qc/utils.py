@@ -122,7 +122,7 @@ def are_biopax_files_the_same(filename_a, filename_b):
         diffs = xmldiff.main.diff_files(filename_a, filename_b)
     except (RuntimeError) as e:
         if "changing the URI of namespaces" in str(e):
-            #If the namespaces of the URI have changed, we count this as being different.
+            # If the namespaces of the URI have changed, we count this as being different.
             return False
         raise e
     diffs = list(filter(lambda diff: not isinstance(diff, xmldiff.actions.MoveNode), diffs))
