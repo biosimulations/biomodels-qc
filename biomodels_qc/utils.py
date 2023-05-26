@@ -97,6 +97,8 @@ def build_combine_archive(archive_dirname, master_rel_filenames,
         location = os.path.relpath(filename, archive_dirname)
         ext = os.path.splitext(filename)[1]
         format = EXTENSION_COMBINE_FORMAT_MAP.get(ext, 'http://purl.org/NET/mediatypes/application/octet-stream')
+        if "metadata.rdf" in filename:
+            format = "http://identifiers.org/combine.specifications/omex-metadata"
         archive.contents.append(
             CombineArchiveContent(
                 location=location,
