@@ -31,7 +31,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.13'
+          python-version: '3.11'
 
       #############################################
       ## Install package and its dependencies
@@ -40,7 +40,7 @@ jobs:
       -   name: Set up poetry environment
           uses: ./.github/actions/setup-poetry-env
           with:
-              python-version: "3.13"
+              python-version: "3.11"
 
       - name: Install pip and setuptools
         run: |
