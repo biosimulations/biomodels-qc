@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "biomodels_qc"
+version = "0.0.2"
+description = "Utility functions to assist biomodels curation."
+authors = ["Center for Reproducible Biomedical Modeling <info@biosimulators.org>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://biosimulations.github.io/biomodels-qc/"
+repository = "https://github.com/biosimulations/biomodels-qc/"
+classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: MIT License',
+        'Topic :: Scientific/Engineering :: Bio-Informatics',
+    ]
+keywords=['systems', 'biology', 'modeling', 'simulation']
+exclude = ['tests', 'tests.*']
+
+[tool.poetry.dependencies]
+python = "^3.10"
+biosimulators_utils = "^0.1.171"
+cement = "^2.0.0"
+kisao = "^2.0"
+lxml = "^5.0"
+nbformat = "^5.0"
+owlready2 = "^0.4"
+pypdf2 = "^3.0"
+python_copasi = "^4.0"
+python_dateutil = "^2.0"
+python_libsbml = "^5.0"
+scipy = "^1.0"
+termcolor = "^3.0"
+xmldiff = "^2.0"
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.1.1"
+flakey = "^1.0"
+pytest = "^8.3.3"
+pytest-cov = "^5.0.0"
+
+[tool.poetry.group.docs.dependencies]
+pydata-sphinx-theme = "*"
+sphinx = ">=1.8"
+
+[tool.poetry.scripts]
+biosimulators-tellurium = 'biosimulators_tellurium.__main__:main'
+fix-tellurium-generated-combine-archive = 'biosimulators_copasi.__main__:fix_copasi_generated_combine_archive'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
