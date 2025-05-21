@@ -158,8 +158,8 @@ class ValidationTestCase(unittest.TestCase):
         self.assertEqual(errors, [])
         self.assertEqual(warnings, [])
 
-        png_filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000693', 'BIOMD0000000693.png')
-        errors, warnings = validation.validate_owl_ontology_file(png_filename)
+        pdf_filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000693', 'BIOMD0000000693.pdf')
+        errors, warnings = validation.validate_owl_ontology_file(pdf_filename)
         self.assertIn('NTriples parsing error', flatten_nested_list_of_strings(errors))
         self.assertEqual(warnings, [])
 
@@ -180,8 +180,8 @@ class ValidationTestCase(unittest.TestCase):
         self.assertEqual(errors, [])
         self.assertEqual(warnings, [])
 
-        png_filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000692', 'BIOMD0000000692.png')
-        errors, warnings = validation.validate_python_file(png_filename)
+        pdf_filename = os.path.join(self.FIXTURE_DIRNAME, 'BIOMD0000000692', 'BIOMD0000000692.pdf')
+        errors, warnings = validation.validate_python_file(pdf_filename)
         self.assertIn('cannot contain null bytes', flatten_nested_list_of_strings(errors))
         self.assertEqual(warnings, [])
 
@@ -381,3 +381,6 @@ class ValidationTestCase(unittest.TestCase):
         errors, warnings = validation.validate_zip_file(png_filename)
         self.assertIn('File is not a zip file', flatten_nested_list_of_strings(errors))
         self.assertEqual(warnings, [])
+
+if __name__ == "__main__":
+    unittest.main()

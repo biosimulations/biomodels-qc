@@ -350,6 +350,8 @@ def validate_python_file(filename):
         return [], []
     except ValueError as exception:
         return [[str(exception)]], []
+    except SyntaxError as exception:
+        return [[str(exception)]], []
 
 
 def validate_sbml_file(filename):
