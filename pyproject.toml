@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "biomodels_qc"
-version = "0.0.2"
+version = "0.0.3"
 description = "Utility functions to assist biomodels curation."
 authors = ["Center for Reproducible Biomedical Modeling <info@biosimulators.org>"]
 license = "MIT"
