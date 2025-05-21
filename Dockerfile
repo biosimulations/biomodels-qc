@@ -78,7 +78,7 @@ RUN apt-get update -y \
         curl \
         build-essential \
     \
-    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+    && curl -fsSL https://deb.nodesource.com/setup_23.x | bash - \
     && apt-get install -y  --no-install-recommends \
         nodejs \
     && npm install -g svglint \
