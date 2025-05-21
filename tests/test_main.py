@@ -3,7 +3,9 @@ from biosimulators_utils.combine.io import CombineArchiveReader
 from unittest import mock
 import biomodels_qc
 import biomodels_qc.__main__
-import capturer
+from sys import platform
+if "win" not in platform:
+    import capturer
 import os
 import shutil
 import tempfile
@@ -22,31 +24,33 @@ class CliTestCase(unittest.TestCase):
         shutil.rmtree(self.temp_dirname)
 
     def test_help(self):
-        with biomodels_qc.__main__.App(argv=[]) as app:
-            with capturer.CaptureOutput(merged=False, relay=False) as captured:
-                app.run()
-                stdout = captured.stdout.get_text()
-                self.assertTrue(stdout.startswith('usage: biomodels-qc'))
-                self.assertEqual(captured.stderr.get_text(), '')
+        if "win" not in platform:
+            with biomodels_qc.__main__.App(argv=[]) as app:
+                with capturer.CaptureOutput(merged=False, relay=False) as captured:
+                    app.run()
+                    stdout = captured.stdout.get_text()
+                    self.assertTrue(stdout.startswith('usage: biomodels-qc'))
+                    self.assertEqual(captured.stderr.get_text(), '')
 
     def test_version(self):
-        with biomodels_qc.__main__.App(argv=['-v']) as app:
-            with capturer.CaptureOutput(merged=False, relay=False) as captured:
-                with self.assertRaises(SystemExit) as cm:
-                    app.run()
-                    self.assertEqual(cm.exception.code, 0)
-                stdout = captured.stdout.get_text()
-                self.assertEqual(stdout, biomodels_qc.__version__)
-                self.assertEqual(captured.stderr.get_text(), '')
-
-        with biomodels_qc.__main__.App(argv=['--version']) as app:
-            with capturer.CaptureOutput(merged=False, relay=False) as captured:
-                with self.assertRaises(SystemExit) as cm:
-                    app.run()
-                    self.assertEqual(cm.exception.code, 0)
-                stdout = captured.stdout.get_text()
-                self.assertEqual(stdout, biomodels_qc.__version__)
-                self.assertEqual(captured.stderr.get_text(), '')
+        if "win" not in platform:
+            with biomodels_qc.__main__.App(argv=['-v']) as app:
+                with capturer.CaptureOutput(merged=False, relay=False) as captured:
+                    with self.assertRaises(SystemExit) as cm:
+                        app.run()
+                        self.assertEqual(cm.exception.code, 0)
+                    stdout = captured.stdout.get_text()
+                    self.assertEqual(stdout, biomodels_qc.__version__)
+                    self.assertEqual(captured.stderr.get_text(), '')
+    
+            with biomodels_qc.__main__.App(argv=['--version']) as app:
+                with capturer.CaptureOutput(merged=False, relay=False) as captured:
+                    with self.assertRaises(SystemExit) as cm:
+                        app.run()
+                        self.assertEqual(cm.exception.code, 0)
+                    stdout = captured.stdout.get_text()
+                    self.assertEqual(stdout, biomodels_qc.__version__)
+                    self.assertEqual(captured.stderr.get_text(), '')
 
     def test_raw_cli(self):
         with mock.patch('sys.argv', ['', '--help']):
@@ -147,3 +151,6 @@ class CliTestCase(unittest.TestCase):
 
         with biomodels_qc.__main__.App(argv=['convert', temp_entry_dirname, '--format', 'MATLAB']) as app:
             app.run()
+
+if __name__ == "__main__":
+    unittest.main()

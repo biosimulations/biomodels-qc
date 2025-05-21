@@ -298,7 +298,7 @@ def validate_owl_ontology_file(filename):
             * nested :obj:`list` of :obj:`str`: nested list of errors
             * nested :obj:`list` of :obj:`str`: nested list of warnings
     """
-    onto = owlready2.get_ontology(filename)
+    onto = owlready2.get_ontology("file://" + filename)
     try:
         onto.load()
         return [], []
@@ -349,6 +349,8 @@ def validate_python_file(filename):
             ast.parse(file.read())
         return [], []
     except ValueError as exception:
+        return [[str(exception)]], []
+    except SyntaxError as exception:
         return [[str(exception)]], []
 
 
